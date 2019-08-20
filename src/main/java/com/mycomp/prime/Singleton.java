@@ -24,10 +24,17 @@ public class Singleton implements Serializable {//implemented Serializable just 
 	}
 
 	public int findNthPrimeNumber(int nth) {
-		return result.findPrime(nth);
+		int count=0;
+		int i=1;
+		while(count<nth) {
+			if(findPrime(++i, i-1)==1) {
+				count++;
+			}
+		}
+		return i;
 	}
 
-	CalculateNthPrime result = (int nth) -> {
+	/*CalculateNthPrime result = (int nth) -> {
 		System.out.println("Within findprime method, finding prime for nth>>" + nth);
 		int i;
 		int count=0;
@@ -42,7 +49,24 @@ public class Singleton implements Serializable {//implemented Serializable just 
 		}
 		count=0;
 		return num;
-	};
+	};*/
+	
+	public int findPrime(int num, int divisor) {
+		if (divisor == 1) {
+            return 1;
+       }
+       try {
+            if (num % divisor == 0) {
+                 return 0;
+            } else {
+                 return findPrime(num, divisor - 1);
+            }
+       } catch (Exception e) {
+            return 1;
+       }
+		
+	}
+	
 
 	public static Singleton getInsance() {
 		return singleton;
